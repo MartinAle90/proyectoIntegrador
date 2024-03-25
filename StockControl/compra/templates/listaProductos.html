@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Productos</title>
+</head>
+<body>
+    <h1>Productos
+        <h3>
+            <a href="crear">Agregar Producto</a>
+        </h3>
+        
+    </h1>
+
+    <ul>
+        {% for producto in productos %}
+            <li>{{producto.id}} || {{producto.nombre_Prod}} || {{producto.precio_Prod}} || {{producto.stock_actual_Prod}} || {{producto.proveedor}} ||
+                <a href="actualizar/{{producto.id}}">Editar</a> ||
+                <a href="borrar/{{producto.id}}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
