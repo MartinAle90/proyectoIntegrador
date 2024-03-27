@@ -3,16 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista Productos</title>
+    <title>Edicion Proveedor</title>
 </head>
 <body>
-    <h1>Productos</h1>
-    <p>{{productos.nombre_Prod}}</p>
+    <h1>Proveedor</h1>
+    <p>{{actualizarProveedor.id}}</p>
 
-    <ul>
-        {% for producto in productos %}
-            <li>{{producto.nombre_Prod}} // {{producto.precio_Prod}} // {{producto.stock_actual_Prod}} // {{producto.proveedor}}</li>
-        {% endfor %}
-    </ul>
+    <table id="tabla-principal">
+        <tr>
+            <th text-align: center>Nombre</th>
+            <th>Apellido</th>
+            <th>Dni</th>
+        </tr>
+        <tr>
+                <td>{{actualizarProveedor.nombre_Prov}}</td>
+                <td>{{actualizarProveedor.apellido_Prov}}</td>
+                <td>{{actualizarProveedor.dni_Prov}}</td>
+        </tr>
+    </table>
+    <br>
+    <a href="/compras/proveedores/crear/">
+        <input type="button" action="crear"  value="Confirmar"/>
+    </a>
+    <a href="/compras/proveedores/lista">
+        <input type="button" value="Cancelar" />
+    </a>
 </body>
 </html>
+
+<style>
+    th {
+        text-align: center;
+    }
+
+</style>

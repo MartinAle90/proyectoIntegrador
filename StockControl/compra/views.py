@@ -11,6 +11,10 @@ def crear_producto(request, inputNombre, inputPrecio ,inputStock):
     nuevoProducto.save()
     return render(request, 'crearProducto.html', {'nuevoProducto': nuevoProducto})
 
+def formulario_producto(request):
+
+    return render(request, 'formularioAgregarProducto.html')
+
 # Read Producto
 def mostrar_productos(request):
     productos = Producto.objects.all()
@@ -41,6 +45,10 @@ def crear_proveedor(request, inputNombre, inputApellido ,inputDni):
     )
     nuevoProveedor.save()
     return render(request, 'crearProveedor.html', {'nuevoProveedor': nuevoProveedor})
+
+def formulario_proveedor(request):
+
+    return render(request, 'formularioAgregarProveedor.html')
 
 # Read Proveedor
 def mostrar_proveedores(request):
