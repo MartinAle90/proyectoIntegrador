@@ -8,50 +8,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Proveedores</title>
 </head>
+
 <body>
-    <h1>
-        Proveedores
-    </h1>
-
-    <div>
-        <a href="{% url 'formulario_crear_proveedor' %} " class="boton_agregar">
-            <input type="button" value="Agregar Proveedor" class="btn btn-primary"/>
-        </a>
-    </div>
-
-    <table id="tabla-principal" class="table table-sm">
-        <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Dni</th>
-            <th></th>
-            <th></th>
-        </tr>
-        {% for proveedor in proveedores %}
-        <tr>
-            
-                <td>{{proveedor.nombre_Prov}}</td>
-                <td>{{proveedor.apellido_Prov}}</td>
-                <td>{{proveedor.dni_Prov}}</td>
-                <td>
-                    <a href="{% url 'formulario_proveedor' proveedor.id %}">
-                        <input type="button" value="Editar" />
-                    </a>
-                </td>
-                <td>
-                    <a href="{% url 'eliminar_proveedor' proveedor.id %}">
-                        <input type="submit" value="Eliminar" />
-                    </a>
-                </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <div>
-        <a href="{% url 'index' %}" class="boton_index">
-            <input type="button" value="Pagina Principal" class="btn btn-warning"/>
-        </a>
-    </div>
+    <section class="jumbotron">
+        <div class="container">
+            <h1 class="titulo">
+                Proveedores
+                <a href="{% url 'formulario_crear_proveedor' %}" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                    </svg>
+                </a>
+                <a href="{% url 'index' %}" class="btn btn-secondary">
+                    <i class="bi bi-house">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-house" viewBox="0 0 16 16">
+                            <path
+                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                        </svg>
+                    </i>
+                </a>
+            </h1>
+            <br>
+            <table id="tabla-principal" class="table table-sm">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Dni</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{proveedor.nombre_Prov}}</td>
+                    <td>{{proveedor.apellido_Prov}}</td>
+                    <td>{{proveedor.dni_Prov}}</td>
+                    <td>
+                        <a href="{% url 'formulario_proveedor' proveedor.id %}" class="btn btn-warning">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path
+                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                            </svg>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'eliminar_proveedor' proveedor.id %}" class="btn btn-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-eraser" viewBox="0 0 16 16">
+                                <path
+                                    d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z" />
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
 </body>
 
 <style>
@@ -64,16 +81,11 @@
     .table{
         width: 600px;
     }
-    .boton_index{
-        padding-top: 25px;
-        padding-left: 230px;
-        display: flow;
+    .container{
+        padding-top: 20px;
     }
-    .boton_agregar{
-        padding-top: 25px;
-        padding-bottom: 25px;
-        padding-left: 230px;
-        display: flow;
+    svg{
+        vertical-align: initial;
     }
 </style>
 

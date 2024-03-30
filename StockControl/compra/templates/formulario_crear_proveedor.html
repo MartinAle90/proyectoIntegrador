@@ -6,49 +6,51 @@
     
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edicion de Proveedor</title>
+        <title>Agregar Proveedor</title>
     </head>
-    <h1>Edicion de Proveedor</h1>
-    <body>
-        <div class="box">
-            <form action="{% url 'crear_proveedor' %}" method="post">
-    
-                {% csrf_token %}
-    
-                <div class="mb-3">
-                    <label for="inputNombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre_Prov" id="nombre_Prov" value="{% if proveedor %}{{ proveedor.nombre_Prov }}{% endif %}">
-                </div>
-    
-                <div class="mb-3">
-                    <label for="inputApellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" name="apellido_Prov" id="apellido_Prov" value="{% if proveedor %}{{ proveedor.apellido_Prov }}{% endif %}">
-                </div>
-    
-                <div class="mb-3">
-                    <label for="inputDni" class="form-label">Dni</label>
-                    <input type="number" class="form-control" name="dni_Prov" id="dni_Prov" value="{% if proveedor %}{{ proveedor.dni_Prov }}{% endif %}">
-                </div>
-    
-                <input type="submit" value="Agregar" class="btn btn-primary">
-    
-                <a href="{% url 'lista_proveedores' %}" class="btn btn-danger">Cancelar</a>
-    
-            </form><br>
-    
-            
-    
+
+<body>
+
+    <section class="jumbotron">
+        <div class="container">
+            <h1 class="titulo">
+                Proveedor
+            </h1>
+            <div class="box">
+                <form action="{% url 'crear_proveedor' %}" method="post">
+                    
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="inputNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre_Prov" id="nombre_Prov" value="{% if proveedor %}{{ proveedor.nombre_Prov }}{% endif %}">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="inputApellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido_Prov" id="apellido_Prov" value="{% if proveedor %}{{ proveedor.apellido_Prov }}{% endif %}">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="inputDni" class="form-label">Dni</label>
+                        <input type="number" class="form-control" name="dni_Prov" id="dni_Prov" value="{% if proveedor %}{{ proveedor.dni_Prov }}{% endif %}">
+                    </div>
+                    
+                    <input type="submit" value="Agregar" class="btn btn-success">
+                    
+                    <a href="{% url 'lista_proveedores' %}" class="btn btn-danger">Cancelar</a>
+                    
+                </form>
+            </div>
         </div>
-    </body>
-    <style>
-    
-        .box {
-            height: 50%;
-            width: 25%;
-            padding-left: 10px;
+    </section> 
+</body>
+
+<style>
+    .box {
+        height: 100%;
+        width: 50%;
     }
-    </style>
-
-
+</style>
 
 </html>
