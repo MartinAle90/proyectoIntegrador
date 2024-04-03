@@ -22,18 +22,18 @@
                     {% csrf_token %}
                     
                     <div class="mb-3">
-                        <label for="inputNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre_Prov" id="nombre_Prov" value="{% if proveedor %}{{ proveedor.nombre_Prov }}{% endif %}">
+                        <label for="nombre_prov" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre_prov" id="nombre_prov" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="inputApellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" name="apellido_Prov" id="apellido_Prov" value="{% if proveedor %}{{ proveedor.apellido_Prov }}{% endif %}">
+                        <label for="apellido_prov" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" name="apellido_prov" id="apellido_prov" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="inputDni" class="form-label">Dni</label>
-                        <input type="number" class="form-control" name="dni_Prov" id="dni_Prov" value="{% if proveedor %}{{ proveedor.dni_Prov }}{% endif %}">
+                        <label for="dni_prov" class="form-label">Dni</label>
+                        <input type="number" class="form-control" name="dni_prov" id="dni_prov" required>
                     </div>
                     
                     <input type="submit" value="Agregar" class="btn btn-success">

@@ -28,28 +28,35 @@ def formulario_proveedor(request, proveedor_id):
 
 # READ - Se muestra el detalle de un producto obtenido por id
 def formulario_producto(request, producto_id):
+    proveedores = Proveedor.objects.all()
     producto = get_object_or_404(Producto, id=producto_id)
-    return render(request, 'formulario_producto.html', {'producto':producto})
+    return render(request, 'formulario_producto.html', {'producto':producto, 'proveedores':proveedores})
 
 # ----------------------------------------------------------------------------------------------------
 
 # CREATE - Creacion de un proveedor
 def crear_proveedor(request):
     if request.method == 'POST':
-        nombre_Prov = request.POST.get('nombre_Prov')
-        apellido_Prov = request.POST.get('apellido_Prov')
-        dni_Prov = request.POST.get('dni_Prov')
-        Proveedor.objects.create(nombre_Prov=nombre_Prov, apellido_Prov=apellido_Prov, dni_Prov=dni_Prov)
+        nombre_prov = request.POST.get('nombre_prov')
+        apellido_prov = request.POST.get('apellido_prov')
+        dni_prov = request.POST.get('dni_prov')
+        Proveedor.objects.create(nombre_prov=nombre_prov, apellido_prov=apellido_prov, dni_prov=dni_prov)
         return redirect('lista_proveedores')
     return render(request, 'lista_proveedores.html')
 
 # CREATE - Creacion de un productor
 def crear_producto(request):
     if request.method == 'POST':
-        nombre_Prod = request.POST.get('nombre_Prod')
-        precio_Prod = request.POST.get('precio_Prod')
-        stock_actual_Prod = request.POST.get('stock_actual_Prod')
-        Producto.objects.create(nombre_Prod=nombre_Prod, precio_Prod=precio_Prod, stock_actual_Prod=stock_actual_Prod)
+        nombre_prod = request.POST.get('nombre_prod')
+        precio_prod = request.POST.get('precio_prod')
+        stock_actual_prod = request.POST.get('stock_actual_prod')
+        proveedor_prod = request.POST.get('proveedor_prod')
+        Producto.objects.create(
+            nombre_prod=nombre_prod,
+            precio_prod=precio_prod,
+            stock_actual_prod=stock_actual_prod,
+            proveedor_prod=Proveedor(extract_digits(proveedor_prod))
+            )
         return redirect('lista_productos')
     return render(request, 'lista_productos.html')
 
@@ -57,7 +64,8 @@ def formulario_crear_proveedor(request):
     return render(request, 'formulario_crear_proveedor.html')
 
 def formulario_crear_producto(request):
-    return render(request, 'formulario_crear_producto.html')
+    proveedores = Proveedor.objects.all()
+    return render(request, 'formulario_crear_producto.html', {'proveedores':proveedores})
 
 # ----------------------------------------------------------------------------------------------------
 
@@ -65,12 +73,12 @@ def formulario_crear_producto(request):
 def actualizar_proveedor(request, proveedor_id):
     proveedor = get_object_or_404(Proveedor, id=proveedor_id)
     if request.method == 'POST':
-        nombre_Prov = request.POST.get('nombre_Prov')
-        apellido_Prov = request.POST.get('apellido_Prov')
-        dni_Prov = request.POST.get('dni_Prov')
-        proveedor.nombre_Prov = nombre_Prov
-        proveedor.apellido_Prov = apellido_Prov
-        proveedor.dni_Prov = dni_Prov
+        nombre_prov = request.POST.get('nombre_prov')
+        apellido_prov = request.POST.get('apellido_prov')
+        dni_prov = request.POST.get('dni_prov')
+        proveedor.nombre_prov = nombre_prov
+        proveedor.apellido_prov = apellido_prov
+        proveedor.dni_prov = dni_prov
         proveedor.save()
         return redirect('lista_proveedores')
     return render(request, 'lista_proveedores.html', {'proveedor': proveedor})
@@ -79,17 +87,17 @@ def actualizar_proveedor(request, proveedor_id):
 def actualizar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     if request.method == 'POST':
-        nombre_Prod = request.POST.get('nombre_Prod')
-        precio_Prod = request.POST.get('precio_Prod')
-        stock_actual_Prod = request.POST.get('stock_actual_Prod')
-        proveedor = request.POST.get('proveedor')
-        producto.nombre_Prod = nombre_Prod
-        producto.precio_Prod = precio_Prod
-        producto.stock_actual_Prod = stock_actual_Prod
-        Proveedor.objects = proveedor
+        nuevo_nombre_prod = request.POST.get('nombre_prod')
+        nuevo_precio_prod = request.POST.get('precio_prod')
+        nuevo_stock_actual_prod = request.POST.get('stock_actual_prod')
+        nuevo_proveedor = request.POST.get('proveedor_prod')
+        producto.nombre_prod = nuevo_nombre_prod
+        producto.precio_prod = nuevo_precio_prod
+        producto.stock_actual_prod = nuevo_stock_actual_prod
+        producto.proveedor_prod = Proveedor(extract_digits(nuevo_proveedor))
         producto.save()
         return redirect('lista_productos')
-    return render(request, 'lista_productos.html', {'producto': producto})
+    return render(request, 'lista_productos.html', {'producto': producto} )
 
 # ----------------------------------------------------------------------------------------------------
 
@@ -104,3 +112,13 @@ def eliminar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     producto.delete()
     return redirect('lista_productos')
+
+# ----------------------------------------------------------------------------------------------------
+
+# funcion que se usa para la extraccion de los digitos de un string
+def extract_digits(text):
+    digits = []
+    for char in text:
+        if char.isdigit():
+            digits.append(char)
+    return ''.join(digits)

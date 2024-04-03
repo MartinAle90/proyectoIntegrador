@@ -19,32 +19,35 @@
                 <form action=" actualizar/" method="post">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="nombre_Prod" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre_Prod" id="nombre_Prod"
-                            value="{% if producto %}{{ producto.nombre_Prod }}{% endif %}">
+                        <label for="nombre_prod" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre_prod" id="nombre_prod"
+                            value="{% if producto %}{{ producto.nombre_prod }}{% endif %}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="inputApellido" class="form-label">Precio</label>
-                        <input type="number" class="form-control" name="precio_Prod" id="precio_Prod"
-                            value="{% if producto %}{{ producto.precio_Prod }}{% endif %}">
+                        <label for="precio_prod" class="form-label">Precio</label>
+                        <input type="number" class="form-control" name="precio_prod" id="precio_prod"
+                            value="{% if producto %}{{ producto.precio_prod }}{% endif %}">
                     </div>
                     <div class="mb-3">
-                        <label for="inputDni" class="form-label">Stock</label>
-                        <input type="number" class="form-control" name="stock_actual_Prod" id="stock_actual_Prod"
-                            value="{% if producto %}{{ producto.stock_actual_Prod }}{% endif %}">
+                        <label for="stock_actual_prod" class="form-label">Stock</label>
+                        <input type="number" class="form-control" name="stock_actual_prod" id="stock_actual_prod"
+                            value="{% if producto %}{{ producto.stock_actual_prod }}{% endif %}">
                     </div>
                     <div class="mb-3">
-                        <label for="inputDni" class="form-label">Proveedor</label>
-                        <select name="proveedor" required id="proveedor">
-                            <option>
-                                {% if producto %}
-                                {{ producto.proveedor }}
+                        <label for="proveedor_prod" class="form-label">Proveedor</label>
+                        <select name="proveedor_prod" required id="proveedor_prod">
+
+                            {% for proveedor in proveedores %}
+                                {% if producto.proveedor_prod.id == proveedor.id %}
+                                    <option selected="selected">
+                                        {{proveedor.id}} - {{proveedor.nombre_prov}} {{proveedor.apellido_prov}}
+                                    </option>
                                 {% else %}
-                                {% for proveedor in proveedores %}
-                                {{proveedor.id}} - {{proveedor.nombre_Prov}}
-                                {% endfor %}
+                                    <option>
+                                        {{proveedor.id}} - {{proveedor.nombre_prov}} {{proveedor.apellido_prov}}
+                                    </option>
                                 {% endif %}
-                            </option>
+                            {% endfor %}
                         </select>
                     </div>
                     <input type="submit" value="Editar" class="btn btn-success">

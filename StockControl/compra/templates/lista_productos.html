@@ -38,16 +38,16 @@
                     <th>Nombre</th>
                     <th>Precio $</th>
                     <th>Stock</th>
-                    <th>Proveedor</th>
+                    <th>Proveedor/a</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
                 {% for producto in productos %}
                 <tr>
-                    <td>{{producto.nombre_Prod}}</td>
-                    <td>{{producto.precio_Prod}}</td>
-                    <td>{{producto.stock_actual_Prod}}</td>
-                    <td>{{producto.proveedor}}</td>
+                    <td>{{producto.nombre_prod}}</td>
+                    <td>{{producto.precio_prod}}</td>
+                    <td>{{producto.stock_actual_prod}}</td>
+                    <td>{{producto.proveedor_prod.nombre_prov}} {{producto.proveedor_prod.apellido_prov}}</td>
                     <td>
                         <a href="{% url 'formulario_producto' producto.id %}" class="btn btn-warning">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
